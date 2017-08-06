@@ -1,0 +1,65 @@
+{
+	"variables": [],
+	"info": {
+		"name": "apigee-jenkins-rt-hotels-1.0.0",
+		"_postman_id": "4eda1abd-c06a-7313-47a8-d0c5fb4671b8",
+		"description": "A collection to drive regression tests on jenkins.\nv1.0.0 - simple /GET hotels apikey request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/GET hotels apikey copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//tests[\"[info] Status code is 200\"] = responseCode.code === 200;",
+							"if (responseCode.code !== 200) {",
+							"      tests['[error] Unexpected Status code '.concat(responseCode.code, ' for org: ', environment.org, ' and env: ', environment.env)] = false;",
+							"}",
+							"tests[\"[info] Body contains expected text: Another etc.\"] = responseBody.has(\"Another another Swissotel\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://{{org}}-{{env}}.apigee.net/v1/{{initials}}_hotels/hotels?apikey=aIUlbGqIYF86OSbgxuCBV4wg4GglzZYF",
+					"protocol": "http",
+					"host": [
+						"{{org}}-{{env}}",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"v1",
+						"{{initials}}_hotels",
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "aIUlbGqIYF86OSbgxuCBV4wg4GglzZYF",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
